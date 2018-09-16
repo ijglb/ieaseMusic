@@ -40,7 +40,7 @@ let mainMenu = [
             },
             {
                 label: 'Preferences...',
-                accelerator: 'Cmd+,',
+                accelerator: 'CmdOrCtrl+,',
                 click() {
                     mainWindow.webContents.send('show-preferences');
                 }
@@ -62,7 +62,7 @@ let mainMenu = [
             },
             {
                 label: 'Check for updates',
-                accelerator: 'Cmd+U',
+                accelerator: 'CmdOrCtrl+U',
                 click() {
                     updater.checkForUpdates();
                 }
@@ -122,7 +122,7 @@ let mainMenu = [
             },
             {
                 label: 'Like',
-                accelerator: 'Cmd+L',
+                accelerator: 'CmdOrCtrl+L',
                 click() {
                     mainWindow.show();
                     mainWindow.webContents.send('player-like');
@@ -183,42 +183,42 @@ let mainMenu = [
         submenu: [
             {
                 label: 'Home',
-                accelerator: 'Cmd+Shift+H',
+                accelerator: 'CmdOrCtrl+Shift+H',
                 click() {
                     mainWindow.webContents.send('show-home');
                 }
             },
             {
                 label: 'Search',
-                accelerator: 'Cmd+F',
+                accelerator: 'CmdOrCtrl+F',
                 click() {
                     mainWindow.webContents.send('show-search');
                 }
             },
             {
                 label: 'Top podcasts',
-                accelerator: 'Cmd+Shift+T',
+                accelerator: 'CmdOrCtrl+Shift+T',
                 click() {
                     mainWindow.webContents.send('show-top');
                 }
             },
             {
                 label: 'Playlist',
-                accelerator: 'Cmd+Shift+P',
+                accelerator: 'CmdOrCtrl+Shift+P',
                 click() {
                     mainWindow.webContents.send('show-playlist');
                 }
             },
             {
                 label: 'Made For You',
-                accelerator: 'Cmd+Shift+F',
+                accelerator: 'CmdOrCtrl+Shift+F',
                 click() {
                     mainWindow.webContents.send('show-fm');
                 }
             },
             {
                 label: 'Downloads',
-                accelerator: 'Cmd+Shift+D',
+                accelerator: 'CmdOrCtrl+Shift+D',
                 click() {
                     downloader.showDownloader();
                 }
@@ -228,14 +228,14 @@ let mainMenu = [
             },
             {
                 label: 'Menu',
-                accelerator: 'Cmd+Shift+L',
+                accelerator: 'CmdOrCtrl+Shift+L',
                 click() {
                     mainWindow.webContents.send('show-menu');
                 }
             },
             {
                 label: 'Next Up',
-                accelerator: 'Cmd+P',
+                accelerator: 'CmdOrCtrl+P',
                 click() {
                     mainWindow.webContents.send('show-playing');
                 }
@@ -310,7 +310,7 @@ let trayMenu = [
     },
     {
         label: 'Preferences...',
-        accelerator: 'Cmd+,',
+        accelerator: 'CmdOrCtrl+,',
         click() {
             mainWindow.webContents.send('show-preferences');
         }
@@ -330,7 +330,7 @@ let trayMenu = [
     },
     {
         label: 'Check for updates',
-        accelerator: 'Cmd+U',
+        accelerator: 'CmdOrCtrl+U',
         click() {
             updater.checkForUpdates();
         }
@@ -391,7 +391,7 @@ let dockMenu = [
     },
     {
         label: 'Like',
-        accelerator: 'Cmd+L',
+        accelerator: 'CmdOrCtrl+L',
         click() {
             mainWindow.show();
             mainWindow.webContents.send('player-like');
@@ -400,9 +400,9 @@ let dockMenu = [
 ];
 
 function updateMenu(playing) {
-    if (!isOsx) {
+    /* if (!isOsx) {
         return;
-    }
+    } */
 
     mainMenu[1]['submenu'][0]['label'] = playing ? 'Pause' : 'Play';
     menu = Menu.buildFromTemplate(mainMenu);
@@ -472,6 +472,7 @@ const createMainWindow = () => {
         fullscreenable: false,
         backgroundColor: 'none',
         titleBarStyle: 'hiddenInset',
+        frame: false,
     });
 
     if (isLinux) {
@@ -521,7 +522,7 @@ const createMainWindow = () => {
         var submenu = args.songs.map((e, index) => {
             return {
                 label: e.name,
-                accelerator: `Cmd+${index}`,
+                accelerator: `CmdOrCtrl+${index}`,
                 click() {
                     mainWindow.show();
                     mainWindow.webContents.send('player-play', {

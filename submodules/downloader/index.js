@@ -194,6 +194,16 @@ async function download(task) {
 
 function showDownloader() {
     syncTask();
+    if (downloader.isVisible()) {
+        downloader.hide();
+        return;
+    }
+
+    var mainWindowState = windowStateKeeper({
+        defaultWidth: 360,
+        defaultHeight: 520,
+    });
+    downloader.setPosition(mainWindowState.x + 800, mainWindowState.y);
     downloader.show();
     downloader.focus();
 }
@@ -219,6 +229,7 @@ function createDownloader() {
         fullscreenable: false,
         backgroundColor: 'none',
         titleBarStyle: 'hiddenInset',
+        frame: false,
     });
 
     downloader.on('close',

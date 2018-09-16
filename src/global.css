@@ -27,7 +27,7 @@ body {
     overflow-y: hidden;
     font-size: 13px;
     font-family: -apple-system, BlinkMacSystemFont, "Helvetica", "Roboto", "Segoe UI", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-    -webkit-app-region: drag;
+    /* -webkit-app-region: drag; */
 }
 
 .scroll-horizontal {

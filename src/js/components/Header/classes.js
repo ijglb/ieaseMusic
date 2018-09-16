@@ -44,6 +44,27 @@ export default theme => ({
         background: 'transparent !important',
     },
 
+    close: {
+        height: 12,
+        width: 12,
+        borderRadius: 12,
+        border: 'thin solid #ddd',
+        marginLeft: 24,
+        background: '#ff0000',
+        boxSizing: 'border-box',
+    },
+
+    minimize: {
+        height: 12,
+        width: 12,
+        borderRadius: 12,
+        border: 'thin solid #ddd',
+        marginLeft: 41,
+        background: '#ffbd2e',
+        boxSizing: 'border-box',
+        position: 'absolute',
+    },
+
     backward: {
         height: 12,
         width: 12,
@@ -52,6 +73,7 @@ export default theme => ({
         marginLeft: 58,
         background: '#eee',
         boxSizing: 'border-box',
+        position: 'absolute',
     },
 
     subscribed: {

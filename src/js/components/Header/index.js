@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { inject, observer } from 'mobx-react';
 import injectSheet from 'react-jss';
 import clazz from 'classname';
+import { remote } from 'electron';
 
 import classes from './classes';
 
@@ -22,6 +23,7 @@ class Header extends Component {
         showBack: PropTypes.bool,
         showFav: PropTypes.bool,
         showPlaylist: PropTypes.bool,
+        showWinButton: PropTypes.bool,
     };
 
     static defaultProps = {
@@ -29,6 +31,7 @@ class Header extends Component {
         showBack: true,
         showFav: false,
         showPlaylist: true,
+        showWinButton: process.platform === 'win32',
     };
 
     goBack = () => window.history.back()
@@ -46,6 +49,31 @@ class Header extends Component {
                 onClick={e => this.goBack()}
             />
         );
+    }
+
+    doClose = () => remote.getCurrentWindow().close()
+
+    doMinimize = () => remote.getCurrentWindow().minimize()
+
+    renderWinButton() {
+        var { classes, showWinButton } = this.props;
+
+        if (!showWinButton) {
+            return false;
+        }
+
+        var arr = [
+            <span
+                className={classes.close}
+                onClick={e => this.doClose()}
+            />,
+            <span
+                className={classes.minimize}
+                onClick={e => this.doMinimize()}
+            />
+        ];
+
+        return arr;
     }
 
     renderPlaylist() {
@@ -147,6 +175,9 @@ class Header extends Component {
                         })
                     }
                 >
+                    {
+                        this.renderWinButton()
+                    }
                     {
                         this.renderBack()
                     }
