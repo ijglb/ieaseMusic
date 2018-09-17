@@ -2,7 +2,6 @@
 import fs from 'fs';
 import path from 'path';
 import { app, BrowserWindow, ipcMain, shell } from 'electron';
-import windowStateKeeper from 'electron-window-state';
 import nodeID3 from 'node-id3';
 import tmp from 'tmp-promise';
 import mkdirp from 'mkdirp';
@@ -19,6 +18,7 @@ const _DOWNLOAD_DIR = path.join(app.getPath('music'), pkg.name);
 let debug = _debug('dev:submodules:downloader');
 let error = _debug('dev:submodules:downloader:error');
 let downloader;
+let mainWindow;
 let cancels = {};
 
 function isDev() {
@@ -199,28 +199,24 @@ function showDownloader() {
         return;
     }
 
-    var mainWindowState = windowStateKeeper({
-        defaultWidth: 360,
-        defaultHeight: 520,
-    });
-    downloader.setPosition(mainWindowState.x + 800, mainWindowState.y);
+    var bounds = mainWindow.getBounds();
+    downloader.setPosition(bounds.x + bounds.width, bounds.y);
     downloader.show();
     downloader.focus();
 }
 
-function createDownloader() {
+function createDownloader(window) {
     if (downloader) {
         showDownloader();
     }
 
-    var mainWindowState = windowStateKeeper({
-        defaultWidth: 360,
-        defaultHeight: 520,
-    });
+    mainWindow = window;
+
+    var bounds = mainWindow.getBounds();
 
     downloader = new BrowserWindow({
-        x: mainWindowState.x + 800,
-        y: mainWindowState.y,
+        x: bounds.x + bounds.width,
+        y: bounds.y,
         show: false,
         width: 360,
         height: 520,

@@ -427,6 +427,11 @@ function updateTray(playing) {
         tray.on('right-click', () => {
             tray.popUpContextMenu();
         });
+
+        tray.on('double-click', () => {
+            let isVisible = mainWindow.isVisible();
+            isVisible ? mainWindow.hide() : mainWindow.show();
+        });
     }
 
     tray.setImage(icon);
@@ -508,7 +513,7 @@ const createMainWindow = () => {
             return;
         }
 
-        if (forceQuit) {
+        if (forceQuit || !tray) {
             app.quit();
         } else {
             e.preventDefault();
@@ -637,7 +642,7 @@ const createMainWindow = () => {
     registerGlobalShortcut();
     usocket(shared, mainWindow);
     updater.installAutoUpdater(() => goodbye());
-    downloader.createDownloader();
+    downloader.createDownloader(mainWindow);
     mainWindow.webContents.setUserAgent('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/603.3.8 (KHTML, like Gecko) Version/10.1.2 Safari/603.3.8');
     debug('Create main process success 🍻');
 };

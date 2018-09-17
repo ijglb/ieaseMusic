@@ -70,6 +70,9 @@ class Header extends Component {
             <span
                 className={classes.minimize}
                 onClick={e => this.doMinimize()}
+            />,
+            <span
+                className={classes.move}
             />
         ];
 

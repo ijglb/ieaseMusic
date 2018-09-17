@@ -21,24 +21,6 @@
 
         document.addEventListener('dragover', e => e.preventDefault(), false);
         document.addEventListener('drop', e => e.preventDefault(), false);
-        //拖拽窗口
-        let dragging = false;
-        const mainWindow = require('electron').remote.getCurrentWindow();
-        document.addEventListener('mousedown', e => {
-            dragging = true;
-        });
-        document.addEventListener('mouseup',  () => {
-            dragging = false;
-        });
-        document.addEventListener('mouseleave',  () => {
-            dragging = false;
-        });
-        document.addEventListener('mousemove', e => {
-            if(dragging){
-                let pos = mainWindow.getPosition();
-                mainWindow.setPosition(pos[0] + e.movementX, pos[1] + e.movementY, true);
-            }
-        });
     </script>
 </body>
 </html>

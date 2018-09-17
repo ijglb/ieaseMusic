@@ -49,7 +49,7 @@ export default theme => ({
         width: 12,
         borderRadius: 12,
         border: 'thin solid #ddd',
-        marginLeft: 24,
+        marginLeft: 7,
         background: '#ff0000',
         boxSizing: 'border-box',
     },
@@ -59,10 +59,22 @@ export default theme => ({
         width: 12,
         borderRadius: 12,
         border: 'thin solid #ddd',
-        marginLeft: 41,
+        marginLeft: 24,
         background: '#ffbd2e',
         boxSizing: 'border-box',
         position: 'absolute',
+    },
+
+    move: {
+        height: 12,
+        width: 12,
+        borderRadius: 12,
+        border: 'thin solid #ddd',
+        marginLeft: 41,
+        background: '#008000',
+        boxSizing: 'border-box',
+        position: 'absolute',
+        '-webkit-app-region': 'drag',
     },
 
     backward: {
