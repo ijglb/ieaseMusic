@@ -56,8 +56,8 @@ export default theme => ({
             }
         },
 
-        '& [playing] span': {
-            display: 'inline-block',
+        '& [playing] p': {
+            display: 'block',
             paddingBottom: 4,
             fontSize: 24,
             color: colors.pallet.mint,

@@ -41,6 +41,24 @@ router.get('/:id', async(req, res) => {
 
                 result[times] = content;
             });
+
+            // 如果翻译歌词
+            if (data.tlyric.lyric) {
+                let tlyric = data.tlyric.lyric.split('\n');
+
+                tlyric.map(e => {
+                    let match = e.match(/\[.+\]/);
+
+                    if (!match) {
+                        return;
+                    }
+
+                    let timestamp = match[0].replace(/\D/g, ':').replace(/^:|:$/g, '').split(':');
+                    let content = e.replace(/\[.+\]/, '');
+                    let times = parseInt(+timestamp[0] * 60 * 1000) + parseInt(+timestamp[1] * 1000) + parseInt(timestamp[2]);
+                    result[times] += ('\n' + content);
+                });
+            }
         }
     } catch (ex) {
         error('Failed to get lyrics: %O', ex);

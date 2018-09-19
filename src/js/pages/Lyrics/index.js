@@ -43,17 +43,16 @@ class Lyrics extends Component {
 
         return times.map(
             (e, index) => {
+                var arr = lyrics[e].split('\n');
                 return (
-                    <p
+                    <span
                         data-times={e}
                         key={index}
                     >
-                        <span>
-                            {
-                                lyrics[e]
-                            }
-                        </span>
-                    </p>
+                        {
+                            arr.map(v => <p>{v}</p>)
+                        }
+                    </span>
                 );
             }
         );
